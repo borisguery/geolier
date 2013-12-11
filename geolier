@@ -128,10 +128,9 @@ exit_if_not_root() {
 VERBOSE=0
 DRY_RUN=0
 
-exit_if_not_root
-
 case $1 in
     create)
+        exit_if_not_root
         shift
         parse_options $@
         shift $((OPTIND-1)); OPTIND=1
@@ -139,6 +138,7 @@ case $1 in
         exit 0
         ;;
     delete)
+        exit_if_not_root
         shift
         parse_options $@
         shift $((OPTIND-1)); OPTIND=1
