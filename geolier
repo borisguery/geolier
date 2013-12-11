@@ -2,7 +2,11 @@
 
 usage() {
     cat <<EOF
-usage: $0 options
+usage: $0 <command> [-v] [-d] [<args>]
+
+Currently supported commands are:
+    create [<username>]
+    delete [<username>]
 EOF
 }
 
