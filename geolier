@@ -5,9 +5,9 @@ usage() {
 usage: $0 <command> [-h] [-vvv] [-d] [<args>]
 
 Currently supported commands are:
-    create [<username>]
-    delete [<username>]
-    install
+    create [<username>] Create a new backup user and its jail
+    delete [<username>] Remove a backup user and its jail (including its data)
+    install             Install jailkit
 EOF
 }
 
