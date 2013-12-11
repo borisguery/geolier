@@ -65,9 +65,10 @@ create_backup_user() {
     FINGERPRINT=$(ssh-keygen -l -f $KEY_FILE | cut -d\  -f2)
     echo "-> ssh key fingerprint: ($FINGERPRINT)"
     run mkdir $USER_HOME/.ssh/
-    run "cat $KEY_FILE >> $USER_HOME/.ssh/authorized_keys"
-    run chown $USER:$USER $USER_HOME/.ssh/authorized_keys
-    run chmod 600 $USER/.ssh/authorized_keys
+    run mv $KEY_FILE $USER_HOME/.ssh/authorized_keys
+    run chown -R $USER $USER_HOME/.ssh
+    run chmod 500 $USER_HOME/.ssh/
+    run chmod 600 $USER_HOME/.ssh/authorized_keys
 }
 
 delete_backup_user() {
