@@ -92,7 +92,7 @@ delete_backup_user() {
     confirm "Well, I am a bit paranoiac, did you change your mind? [Y/n] " "[nN]" || { echo "I knew it."; exit 0; }
 
     run userdel $USER
-    run echo rm -fr $USER_JAIL_PATH
+    run rm -fr $USER_JAIL_PATH
 }
 
 parse_options() {
