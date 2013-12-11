@@ -53,7 +53,7 @@ create_backup_user() {
     run mkdir $USER_JAIL_PATH
     run chown root:root $USER_JAIL_PATH
 
-    run jk_init -v -j $USER_JAIL_PATH basicshell editors extendedshell netutils ssh uidbasics jk_lsh
+    run jk_init -v -j $USER_JAIL_PATH basicshell editors extendedshell netutils ssh uidbasics jk_lsh scp custom
 
     run jk_jailuser -m -j $USER_JAIL_PATH $USER
   
