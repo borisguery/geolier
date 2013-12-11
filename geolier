@@ -7,6 +7,7 @@ usage: $0 <command> [-h] [-vvv] [-d] [<args>]
 Currently supported commands are:
     create [<username>]
     delete [<username>]
+    install
 EOF
 }
 
@@ -95,6 +96,19 @@ delete_backup_user() {
     run rm -fr $USER_JAIL_PATH
 }
 
+install_jailkit() {
+   TMP_FILE=$(mktemp)
+   echo "-> downloading jailkit"
+   run curl --progress -o $TMP_FILE http://olivier.sessink.nl/jailkit/jailkit-2.16.tar.bz2
+   run cd $(dirname $TMP_FILE)
+   run tar xjf $TMP_FILE
+   JAILKIT_DIR=$(find /tmp/ -type d -name "*jailkit*" | head -n1)
+   run cd $JAILKIT_DIR
+   run ./configure
+   run make
+   confirm "Confirm system-wide installation? [y/N] " "[yY]" || { echo "Ok. you decide."; exit 0; }
+}
+
 parse_options() {
     while getopts "hvd" OPTION
     do
@@ -147,6 +161,14 @@ case $1 in
         parse_options $@
         shift $((OPTIND-1)); OPTIND=1
         delete_backup_user $@
+        exit 0
+        ;;
+    install)
+        exit_if_not_root
+        shift
+        parse_options $@
+        shift $((OPTIND-1)); OPTIND=1
+        install_jailkit
         exit 0
         ;;
     usage)
