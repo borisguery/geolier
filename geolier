@@ -20,11 +20,16 @@ run() {
         if [[ "$VERBOSE" -ge 2 ]]; then
             $@
         else
-            $@ >/dev/null
+            $@ > /dev/null 2>&1
+        fi
+        if [[ "$?" -ne 0 ]]; then
+            if [[ "$VERBOSE" -lt 2 ]]; then
+               return_with_error "an error occured, run with -vv to debug"
+            else
+               exit 1
+            fi
         fi
     fi
-
-
 }
 
 create_backup_user() {
