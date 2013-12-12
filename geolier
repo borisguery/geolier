@@ -127,6 +127,15 @@ parse_options() {
     done
 }
 
+print_version() {
+    local version="${VERSION}"
+    if [[ ${REVISION} != '$rev$' ]]; then
+        version="${version}r${REVISION}"
+    fi
+
+    echo "version: $version"
+}
+
 confirm() {
     read -r -p "$1" response
     case $response in
@@ -145,6 +154,8 @@ exit_if_not_root() {
 
 VERBOSE=0
 DRY_RUN=0
+VERSION="0.1"
+REVISION='$rev$'
 
 case $1 in
     create)
@@ -175,6 +186,10 @@ case $1 in
         usage
         exit 0
         ;;
+    --version)
+        print_version
+        exit 0
+        ;;  
     *)
         usage
         exit 1
