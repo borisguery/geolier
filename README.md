@@ -49,8 +49,8 @@ Currently supported commands are:
     install             Install jailkit
 ```
 
-`-v` set the level of verbosity (more `v`, more verbose)
-`-d` dry-run, do not actually run commands
+* `-v` set the level of verbosity (more `v`, more verbose)
+* `-d` dry-run, do not actually run commands
 
 
 Examples:
